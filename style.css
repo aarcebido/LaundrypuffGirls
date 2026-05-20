@@ -206,10 +206,12 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 92px);
-  position: sticky;
+
+  position: fixed;
   top: 92px;
-  overflow-y: auto;
+  left: 0;
+
+  height: calc(100vh - 92px);
 }
 
 .menu a,
@@ -240,7 +242,8 @@ button {
 .main {
   flex: 1;
   padding: 38px 44px;
-  background: linear-gradient(180deg, #eef8ff, #eaf6ff);
+  background: linear-gradient(180deg, #eef8ff, #eaf6ff)
+  margin-left: 290px;
 }
 
 .panel {
