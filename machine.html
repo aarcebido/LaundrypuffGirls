@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaundryPuff Girls - Machine</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <img src="images-logo.jpg" alt="LaundryPuff Girls Logo" class="header-logo">
+    <h1>LaundryPuff Girls</h1>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <nav class="menu">
+      <a href="homepage.html" class="nav-link">
+        <i class="fa-solid fa-house"></i>
+        <span>Home Page</span>
+      </a>
+      <a href="machine.html" class="nav-link active">
+        <i class="fa-solid fa-gear"></i>
+        <span>Machine</span>
+      </a>
+      <a href="customerhistory.html" class="nav-link">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Customer History</span>
+      </a>
+      <a href="services.html" class="nav-link">
+        <i class="fa-solid fa-list"></i>
+        <span>Services</span>
+      </a>
+    </nav>
+    <div class="logout">
+      <a href="#" onclick="logout()" class="nav-link">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Log Out</span>
+      </a>
+    </div>
+    </aside>
+
+    <main class="main">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Machine Status</h2>
+          <button id="openMachineModal" class="btn btn-light">+ Add Machine</button>
+        </div>
+
+        <div id="machineGrid" class="machine-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="machineModal" class="modal">
+    <section class="modal-card">
+      <h3>Add New Machine</h3>
+      <form id="machineForm">
+        <div class="form-group">
+          <label for="machineName">Machine Name</label>
+          <input type="text" id="machineName" class="form-control" placeholder="Example: Giant Machine 2" required>
+        </div>
+
+        <div class="form-group">
+          <label for="machineModel">Model</label>
+          <input type="text" id="machineModel" class="form-control" placeholder="Example: Giant Washer" required>
+        </div>
+
+        <div class="form-group">
+          <label for="machineType">Machine Type / Capacity</label>
+          <select id="machineType" class="form-control" required>
+            <option value="Giant">Giant - 4-7kg</option>
+            <option value="Titan">Titan - 6-12kg</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="machineStatus">Status</label>
+          <select id="machineStatus" class="form-control" required>
+            <option value="Available">Available</option>
+            <option value="In Use">In Use</option>
+            <option value="Maintenance">Maintenance</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Add Machine</button>
+          <button type="button" id="closeMachineModal" class="btn btn-light">Cancel</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

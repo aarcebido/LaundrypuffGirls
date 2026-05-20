@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaundryPuff Girls - Customer History</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <img src="images-logo.jpg" alt="LaundryPuff Girls Logo" class="header-logo">
+    <h1>LaundryPuff Girls</h1>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <nav class="menu">
+      <a href="homepage.html" class="nav-link">
+        <i class="fa-solid fa-house"></i>
+        <span>Home Page</span>
+      </a>
+      <a href="machine.html" class="nav-link">
+        <i class="fa-solid fa-gear"></i>
+        <span>Machine</span>
+      </a>
+      <a href="customerhistory.html" class="nav-link active">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Customer History</span>
+      </a>
+      <a href="services.html" class="nav-link">
+        <i class="fa-solid fa-list"></i>
+        <span>Services</span>
+      </a>
+    </nav>
+    <div class="logout">
+      <a href="#" onclick="logout()" class="nav-link">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Log Out</span>
+      </a>
+    </div>
+    </aside>
+
+    <main class="main">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Customer History</h2>
+        </div>
+
+        <input type="text" id="searchHistory" class="search-box" placeholder="Search completed paid records...">
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Service</th>
+                <th>KG</th>
+                <th>Date In</th>
+                <th>Date Out</th>
+                <th>Payment</th>
+                <th>Detergent</th>
+                <th>Fabcon</th>
+                <th>Paid?</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

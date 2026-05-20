@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaundryPuff Girls - Add Customer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <img src="images-logo.jpg" alt="LaundryPuff Girls Logo" class="header-logo">
+    <h1>LaundryPuff Girls</h1>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <nav class="menu">
+        <a href="homepage.html" class="active">Home Page</a>
+        <a href="machine.html">Machine</a>
+        <a href="customerhistory.html">Customer History</a>
+        <a href="services.html">Services</a>
+      </nav>
+      <div class="logout">
+        <a href="#" onclick="logout()">Log Out</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="panel form-box">
+        <div class="panel-header">
+          <h2 id="formTitle">Add Customer</h2>
+        </div>
+
+        <div id="customerMessage" class="message"></div>
+
+        <form id="customerForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="customerName">Customer Name</label>
+              <input type="text" id="customerName" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="customerAddress">Address</label>
+              <input type="text" id="customerAddress" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="customerService">Service</label>
+              <select id="customerService" class="form-control" required>
+                <option value="">Select service</option>
+                <optgroup label="Giant Services">
+                  <option value="Giant - Wash">Giant - Wash</option>
+                  <option value="Giant - Dry">Giant - Dry</option>
+                  <option value="Giant - Fold">Giant - Fold</option>
+                  <option value="Giant - Basic Package">Giant - Basic Package</option>
+                  <option value="Giant - Premium Package">Giant - Premium Package</option>
+                </optgroup>
+                <optgroup label="Titan Services">
+                  <option value="Titan - Wash">Titan - Wash</option>
+                  <option value="Titan - Dry">Titan - Dry</option>
+                  <option value="Titan - Fold">Titan - Fold</option>
+                  <option value="Titan - Basic Package">Titan - Basic Package</option>
+                  <option value="Titan - Premium Package">Titan - Premium Package</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contactNo">Contact No.</label>
+              <input type="tel" id="contactNo" class="form-control" placeholder="+63 9XXXXXXXXX" maxlength="13" inputmode="numeric" required>
+            </div>
+
+            <div class="form-group">
+              <label for="customerKg">Weight (kg)</label>
+              <input type="number" id="customerKg" class="form-control" min="1" step="1" required>
+              <div id="kgNote" class="form-note"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="dateIn">Date In</label>
+              <input type="date" id="dateIn" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="dateOut">Date Out</label>
+              <input type="date" id="dateOut" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="paymentPreview">Auto Payment</label>
+              <input type="text" id="paymentPreview" class="form-control" readonly>
+            </div>
+
+            <div class="form-group">
+              <label for="detergent">Detergent</label>
+              <select id="detergent" class="form-control">
+                <option value="">None</option>
+                <option value="Ariel Twin Pack">Ariel Twin Pack - ₱20</option>
+                <option value="Breeze Twin Pack">Breeze Twin Pack - ₱20</option>
+                <option value="Surf">Surf - ₱15</option>
+                <option value="Champion Detergent">Champion Detergent - ₱15</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="detergentQty">Detergent Quantity</label>
+              <input type="number" id="detergentQty" class="form-control" min="0" step="1" value="0">
+            </div>
+
+            <div class="form-group">
+              <label for="fabcon">Fabcon / Fabric Conditioner</label>
+              <select id="fabcon" class="form-control">
+                <option value="">None</option>
+                <option value="Downy">Downy - ₱15</option>
+                <option value="Champion Fabcon">Champion Fabcon - ₱15</option>
+                <option value="Del">Del - ₱10</option>
+                <option value="Calla">Calla - ₱10</option>
+                <option value="Surf Fabcon">Surf Fabcon - ₱10</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="fabconQty">Fabcon Quantity</label>
+              <input type="number" id="fabconQty" class="form-control" min="0" step="1" value="0">
+            </div>
+
+            <div class="form-group">
+              <label for="paymentStatus">Payment Status</label>
+              <select id="paymentStatus" class="form-control" required>
+                <option value="Unpaid">Unpaid</option>
+                <option value="Paid">Paid</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="orderStatus">Laundry Status</label>
+              <select id="orderStatus" class="form-control" required>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="saveCustomerBtn" class="btn btn-primary">Save</button>
+            <a href="homepage.html" class="btn btn-light">Cancel</a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
