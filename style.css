@@ -26,6 +26,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--text);
   background: var(--blue-soft);
+  overflow-x: hidden;
 }
 
 a {
@@ -201,7 +202,6 @@ button {
 }
 
 .layout {
-  display: flex;
   min-height: 100vh;
   padding-top: var(--header-height);
 }
@@ -219,6 +219,8 @@ button {
   top: var(--header-height);
   left: 0;
   height: calc(100vh - var(--header-height));
+  overflow: hidden;
+  z-index: 80;
 }
 
 .menu a,
@@ -247,11 +249,13 @@ button {
 }
 
 .main {
-  flex: 1;
+  width: calc(100% - var(--sidebar-width));
   padding: 38px 44px;
   background: linear-gradient(180deg, #eef8ff, #eaf6ff);
   margin-left: var(--sidebar-width);
   min-height: calc(100vh - var(--header-height));
+  display: flex;
+  justify-content: center;
 }
 
 .panel {
@@ -330,7 +334,8 @@ button {
 }
 
 .form-box {
-  max-width: 900px;
+  width: min(900px, 100%);
+  margin: 0 auto;
 }
 
 .form-grid {
@@ -593,7 +598,7 @@ td:last-child {
   }
 
   .layout {
-    flex-direction: column;
+    display: block;
   }
 
   .sidebar {
@@ -605,6 +610,8 @@ td:last-child {
   }
 
   .main {
+    width: 100%;
+    display: block;
     padding: 24px;
     margin-left: 0;
   }
