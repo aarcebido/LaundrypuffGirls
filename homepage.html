@@ -76,6 +76,23 @@
     </main>
   </div>
 
+  <!-- Quick Payment Status Modal -->
+  <div id="paymentModal" class="modal">
+    <section class="modal-card">
+      <h3 style="font-weight: 900; color: #102d4a;">Payment Status</h3>
+      <div class="form-group">
+        <select id="quickPaymentStatus" class="form-control" style="margin-bottom: 20px;">
+          <option value="Unpaid">Unpaid</option>
+          <option value="Paid">Paid</option>
+        </select>
+      </div>
+      <div class="form-actions" style="margin-top: 10px;">
+        <button id="savePaymentBtn" class="btn btn-primary">Save</button>
+        <button id="closePaymentModal" class="btn btn-light">Cancel</button>
+      </div>
+    </section>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>

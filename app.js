@@ -1,8 +1,3 @@
-/* =========================================================
-   LaundryPuff Girls - Main JavaScript
-   Features copied from the basis system, polished for separate files.
-   ========================================================= */
-
 const STORAGE = {
   users: 'laundrypuff_users',
   currentUser: 'laundrypuff_current_user',
@@ -105,6 +100,7 @@ function showMessage(id, text, type = 'error') {
   if (!box) return;
   box.textContent = text;
   box.className = `message ${type} show`;
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function clearMessage(id) {
@@ -175,10 +171,6 @@ function logout() {
   localStorage.removeItem(STORAGE.currentUser);
   window.location.href = 'index.html';
 }
-
-/* =========================================================
-   AUTH: Login and Signup
-   ========================================================= */
 
 function initLoginPage() {
   const form = document.getElementById('loginForm');
@@ -255,10 +247,6 @@ function initSignupPage() {
   });
 }
 
-/* =========================================================
-   HOMEPAGE TABLE
-   ========================================================= */
-
 function initHomepage() {
   if (!document.getElementById('customersTableBody')) return;
   requireUser();
@@ -294,7 +282,7 @@ function renderCustomers() {
       <td>${formatPeso(customer.payment)}</td>
       <td>${customer.detergent || 'None'} ${customer.detergentQty ? `(${customer.detergentQty})` : ''}</td>
       <td>${customer.fabcon || 'None'} ${customer.fabconQty ? `(${customer.fabconQty})` : ''}</td>
-      <td><span class="badge ${customer.paymentStatus === 'Paid' ? 'paid' : 'unpaid'}">${customer.paymentStatus}</span></td>
+      <td><span class="badge ${customer.paymentStatus === 'Paid' ? 'paid' : 'unpaid'}" onclick="openPaymentModal('${customer.id}', '${customer.paymentStatus}')" style="cursor: pointer;">${customer.paymentStatus}</span></td>
       <td><span class="badge ${customer.orderStatus === 'Completed' ? 'done' : customer.orderStatus === 'In Progress' ? 'progress' : 'pending'}">${customer.orderStatus}</span></td>
       <td>
         <a class="btn btn-light" href="addcustomer.html?id=${customer.id}">Edit</a>
@@ -303,9 +291,46 @@ function renderCustomers() {
   `).join('');
 }
 
-/* =========================================================
-   ADD / EDIT CUSTOMER
-   ========================================================= */
+let currentPaymentCustomerId = null;
+
+function openPaymentModal(id, status) {
+  const modal = document.getElementById('paymentModal');
+  const select = document.getElementById('quickPaymentStatus');
+  if (!modal || !select) return;
+
+  currentPaymentCustomerId = id;
+  select.value = status;
+  modal.classList.add('show');
+}
+
+function initPaymentModal() {
+  const modal = document.getElementById('paymentModal');
+  const closeBtn = document.getElementById('closePaymentModal');
+  const saveBtn = document.getElementById('savePaymentBtn');
+  const select = document.getElementById('quickPaymentStatus');
+
+  if (!modal || !closeBtn || !saveBtn) return;
+
+  closeBtn.addEventListener('click', () => modal.classList.remove('show'));
+  
+  modal.addEventListener('click', event => {
+    if (event.target === modal) modal.classList.remove('show');
+  });
+
+  saveBtn.addEventListener('click', () => {
+    if (!currentPaymentCustomerId) return;
+
+    const customers = getCustomers();
+    const index = customers.findIndex(c => c.id === currentPaymentCustomerId);
+    
+    if (index >= 0) {
+      customers[index].paymentStatus = select.value;
+      saveCustomers(customers);
+      modal.classList.remove('show');
+      renderCustomers();
+    }
+  });
+}
 
 function initCustomerForm() {
   const form = document.getElementById('customerForm');
@@ -353,11 +378,29 @@ function initCustomerForm() {
     const allCustomers = getCustomers();
     const existingIndex = allCustomers.findIndex(item => item.id === customer.id);
 
-    if (existingIndex >= 0) allCustomers[existingIndex] = customer;
-    else allCustomers.push(customer);
+    if (existingIndex >= 0) {
+      allCustomers[existingIndex] = customer;
+    } else {
+      allCustomers.push(customer);
+    }
 
-    saveCustomers(allCustomers);
-    window.location.href = 'homepage.html';
+    try {
+      saveCustomers(allCustomers);
+      showMessage('customerMessage', 'Customer saved successfully! Redirecting...', 'success');
+      
+      const saveBtn = document.getElementById('saveCustomerBtn');
+      if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+      }
+
+      setTimeout(() => {
+        window.location.href = 'homepage.html';
+      }, 1000);
+    } catch (error) {
+      console.error('Error saving customer:', error);
+      showMessage('customerMessage', 'Failed to save customer. Please try again.');
+    }
   });
 }
 
@@ -448,10 +491,6 @@ function updatePaymentPreview() {
   preview.value = formatPeso(total);
 }
 
-/* =========================================================
-   HISTORY PAGE
-   ========================================================= */
-
 function initHistoryPage() {
   if (!document.getElementById('historyTableBody')) return;
   requireUser();
@@ -490,10 +529,6 @@ function renderHistory() {
     </tr>
   `).join('');
 }
-
-/* =========================================================
-   MACHINE PAGE
-   ========================================================= */
 
 function initMachinePage() {
   if (!document.getElementById('machineGrid')) return;
@@ -582,10 +617,6 @@ function deleteMachine(index) {
   renderMachines();
 }
 
-/* =========================================================
-   SERVICES PAGE
-   ========================================================= */
-
 function initServicesPage() {
   const grid = document.getElementById('servicesGrid');
   if (!grid) return;
@@ -626,10 +657,6 @@ function showHelp() {
   );
 }
 
-/* =========================================================
-   INIT CURRENT PAGE
-   ========================================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
   initLoginPage();
   initSignupPage();
@@ -638,4 +665,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initHistoryPage();
   initMachinePage();
   initServicesPage();
+  initPaymentModal();
 });
