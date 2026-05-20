@@ -11,6 +11,8 @@
   --border: #d4e9f8;
   --shadow: 0 14px 30px rgba(6, 63, 104, 0.16);
   --radius: 22px;
+  --header-height: 92px;
+  --sidebar-width: 290px;
 }
 
 * {
@@ -170,7 +172,7 @@ button {
 }
 
 .header {
-  min-height: 92px;
+  min-height: var(--header-height);
   background: var(--navy);
   color: white;
   display: flex;
@@ -178,6 +180,11 @@ button {
   gap: 18px;
   padding: 14px 58px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
 }
 
 .header-logo {
@@ -195,11 +202,12 @@ button {
 
 .layout {
   display: flex;
-  min-height: calc(100vh - 92px);
+  min-height: 100vh;
+  padding-top: var(--header-height);
 }
 
 .sidebar {
-  width: 290px;
+  width: var(--sidebar-width);
   background: white;
   padding: 35px 18px;
   border-right: 1px solid var(--border);
@@ -208,10 +216,9 @@ button {
   justify-content: space-between;
 
   position: fixed;
-  top: 92px;
+  top: var(--header-height);
   left: 0;
-
-  height: calc(100vh - 92px);
+  height: calc(100vh - var(--header-height));
 }
 
 .menu a,
@@ -242,8 +249,9 @@ button {
 .main {
   flex: 1;
   padding: 38px 44px;
-  background: linear-gradient(180deg, #eef8ff, #eaf6ff)
-  margin-left: 290px;
+  background: linear-gradient(180deg, #eef8ff, #eaf6ff);
+  margin-left: var(--sidebar-width);
+  min-height: calc(100vh - var(--header-height));
 }
 
 .panel {
@@ -590,10 +598,15 @@ td:last-child {
 
   .sidebar {
     width: 100%;
+    position: static;
+    top: auto;
+    left: auto;
+    height: auto;
   }
 
   .main {
     padding: 24px;
+    margin-left: 0;
   }
 
   .panel-header,
